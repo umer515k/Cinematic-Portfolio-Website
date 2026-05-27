@@ -41,7 +41,7 @@ export default function About() {
           <div className="absolute inset-0 shadow-[inset_0_0_100px_rgba(0,0,0,0.8)] z-20 pointer-events-none" />
           <div className="w-full h-full bg-foreground/5 rounded-sm overflow-hidden border border-foreground/10 relative">
             <img
-              src="public/images/Profile.webp"
+              src="/images/Profile.webp"
               alt="Umer Khalil"
               className="w-full h-full object-cover object-top grayscale contrast-[1.1] brightness-[0.9] sepia-[0.1]"
             />
@@ -87,7 +87,7 @@ export default function About() {
                       </div>
                   </div>
                   <a
-                      href="public/resume.pdf"
+                      href="/resume.pdf"
                       download
                       className="group flex items-center gap-3 px-6 py-3 border border-foreground/10 rounded-full hover:border-[var(--accent-primary)] transition-all duration-500"
                   >
