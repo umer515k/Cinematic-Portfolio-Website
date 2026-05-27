@@ -7,9 +7,9 @@ import { Send, Mail, Linkedin, Github } from "lucide-react";
 import emailjs from "@emailjs/browser";
 import { useState } from "react";
 
-const EMAILJS_SERVICE  = "service_wnxtvwe";
-const EMAILJS_TEMPLATE = "template_bvubp3i";
-const EMAILJS_KEY      = "Y8CblLvXqALLDfovz";
+const EMAILJS_SERVICE  = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!;
+const EMAILJS_TEMPLATE = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!;
+const EMAILJS_KEY      = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!;
 
 type FormData = { name: string; email: string; message: string };
 
