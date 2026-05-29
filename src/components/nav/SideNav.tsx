@@ -20,18 +20,23 @@ export default function SideNav() {
   const [showPathSwitch, setShowPathSwitch] = useState(false);
 
   useEffect(() => {
-    const observers: IntersectionObserver[] = [];
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && entry.intersectionRatio >= 0.4) {
+            setActive(entry.target.id);
+          }
+        });
+      },
+      { threshold: [0.4] }
+    );
+
     NAV_SECTIONS.forEach(({ id }) => {
       const el = document.getElementById(id);
-      if (!el) return;
-      const obs = new IntersectionObserver(
-        ([entry]) => { if (entry.isIntersecting) setActive(id); },
-        { threshold: 0.4 }
-      );
-      obs.observe(el);
-      observers.push(obs);
+      if (el) observer.observe(el);
     });
-    return () => observers.forEach((o) => o.disconnect());
+
+    return () => observer.disconnect();
   }, [path]);
 
   const scrollTo = (id: string) =>

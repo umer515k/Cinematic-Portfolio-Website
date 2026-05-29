@@ -47,7 +47,6 @@ export default function Projects() {
   return (
     <>
       <section id="projects" className="min-h-screen w-full py-20 md:py-32 px-6 md:px-24 bg-background overflow-hidden relative">
-        <LayoutGroup>
           <div className="max-w-6xl mx-auto space-y-12 md:space-y-16">
             <div className="space-y-4">
               <p className="font-mono text-xs md:text-sm uppercase tracking-[0.3em] text-[var(--accent-primary)]">
@@ -73,7 +72,6 @@ export default function Projects() {
               <SwitchPathCTA />
             </div>
           </div>
-        </LayoutGroup>
       </section>
 
       {/* PORTALS RENDERING AT BODY LEVEL */}
@@ -131,19 +129,20 @@ function ProjectCard({
 
   return (
     <motion.div
-      layoutId={`card-${project.id}`}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       onClick={onClick}
+      style={{ willChange: "transform" }}
       className="group flex flex-col md:flex-row items-stretch border-b border-foreground/10 py-12 cursor-pointer relative overflow-hidden"
     >
       <div className="w-full md:w-1/3 aspect-video md:aspect-auto relative overflow-hidden bg-foreground/5 rounded-sm">
         <motion.img
           whileHover={{ scale: 1.05 }}
-          transition={{ duration: 1.5, ease: "linear" }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
           src={project.thumbnail}
           className="w-full h-full object-cover grayscale brightness-50"
+          style={{ willChange: "transform" }}
           onError={(e) =>
             (e.currentTarget.src =
               "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop")
@@ -200,7 +199,7 @@ function ProjectCard({
           <div className="overflow-hidden group/trigger">
             <span className="font-mono text-[10px] uppercase tracking-[0.3em] relative inline-block text-[var(--accent-primary)] md:text-foreground md:group-hover/trigger:text-[var(--accent-primary)] transition-colors">
               Explore Narrative
-              <span className="absolute bottom-0 left-0 w-full md:w-0 h-[1px] bg-[var(--accent-primary)] transition-all duration-500 md:group-hover/trigger:w-full" />
+              <span className="absolute bottom-0 left-0 w-full h-[1px] bg-[var(--accent-primary)] origin-left scale-x-100 md:scale-x-0 md:group-hover/trigger:scale-x-100 transition-transform duration-500" />
             </span>
           </div>
 
@@ -374,6 +373,7 @@ function ProjectModal({
         {/* Right: Content Area (Independent Scroll) */}
         <div 
           ref={scrollRef}
+          data-lenis-prevent
           className="w-full md:w-3/5 overflow-y-auto p-8 md:p-12 space-y-12 scroll-smooth overscroll-contain"
           style={{ WebkitOverflowScrolling: 'touch' }}
         >

@@ -50,6 +50,7 @@ export default function Skills() {
                             <motion.div
                                 initial={{ opacity: 0, y: 10, scale: 0 }}
                                 whileHover={{ opacity: 1, y: -50, scale: 1 }}
+                                style={{ willChange: "transform, opacity" }}
                                 className="absolute -top-12 left-1/2 -translate-x-1/2 w-12 h-12 bg-[var(--accent-primary)] rounded-full hidden md:flex items-center justify-center pointer-events-none z-20 shadow-xl overflow-hidden"
                             >
                                 <img 

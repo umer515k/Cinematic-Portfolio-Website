@@ -134,19 +134,30 @@ function ScrollRevealText({
   text: string;
   charCount: MotionValue<number>;
 }) {
-  const [revealed, setRevealed] = useState(0);
-  useMotionValueEvent(charCount, "change", (v) => setRevealed(Math.round(v)));
-
   return (
     <h3 className="text-3xl md:text-6xl lg:text-7xl font-serif text-foreground leading-[1.2]">
       {text.split("").map((char, i) => (
-        <span
-          key={i}
-          style={{ opacity: i < revealed ? 1 : 0.08 }}
-        >
-          {char}
-        </span>
+        <Character key={i} index={i} char={char} charCount={charCount} />
       ))}
     </h3>
+  );
+}
+
+function Character({
+  index,
+  char,
+  charCount,
+}: {
+  index: number;
+  char: string;
+  charCount: MotionValue<number>;
+}) {
+  // Direct DOM update: Opacity 1 if charCount > index, else 0.08
+  const opacity = useTransform(charCount, (v) => (v >= index ? 1 : 0.08));
+
+  return (
+    <motion.span style={{ opacity }}>
+      {char}
+    </motion.span>
   );
 }

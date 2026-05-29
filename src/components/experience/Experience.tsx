@@ -42,16 +42,24 @@ export default function Experience() {
         </div>
 
         <motion.div 
-            style={{ x: typeof window !== 'undefined' && window.innerWidth > 768 ? x : 0 }}
+            style={{ 
+              x: typeof window !== 'undefined' && window.innerWidth > 768 ? x : 0,
+              willChange: "transform",
+            }}
             className="flex flex-col md:flex-row gap-12 md:gap-24 px-6 md:px-[20vw] w-full md:w-auto relative z-10"
         >
             {orderedExperience.map((item, index) => (
                 <div key={`${item.company}-${index}`} className="flex-shrink-0 w-full md:w-[60vw] lg:w-[40vw] flex flex-col items-center">
-                    <div className="hidden md:flex w-full justify-between px-4 mb-4 opacity-20">
-                        {[...Array(12)].map((_, i) => (
-                            <div key={i} className="w-3 h-3 rounded-full bg-foreground/10 border border-foreground/5 shadow-inner" />
-                        ))}
-                    </div>
+                    {/* Top Decorative Row (Optimized CSS Pattern) */}
+                    <div 
+                        className="hidden md:block w-full h-3 mb-4 opacity-10"
+                        style={{
+                            backgroundImage: `radial-gradient(circle, currentColor 2px, transparent 2px)`,
+                            backgroundSize: 'calc((100% - 12px) / 11) 100%',
+                            backgroundRepeat: 'repeat-x',
+                            color: 'var(--foreground)'
+                        }}
+                    />
 
                     <div className="w-full min-h-[400px] md:aspect-video bg-foreground/[0.02] border border-foreground/10 rounded-sm p-8 md:p-12 flex flex-col justify-center space-y-6 relative overflow-hidden group">
                         <div className="absolute inset-0 bg-[var(--accent-primary)] opacity-[0.04] group-hover:opacity-[0.08] transition-opacity duration-1000" />
@@ -73,11 +81,16 @@ export default function Experience() {
                         </p>
                     </div>
 
-                    <div className="hidden md:flex w-full justify-between px-4 mt-4 opacity-20">
-                        {[...Array(12)].map((_, i) => (
-                            <div key={i} className="w-3 h-3 rounded-full bg-foreground/10 border border-foreground/5 shadow-inner" />
-                        ))}
-                    </div>
+                    {/* Bottom Decorative Row (Optimized CSS Pattern) */}
+                    <div 
+                        className="hidden md:block w-full h-3 mt-4 opacity-10"
+                        style={{
+                            backgroundImage: `radial-gradient(circle, currentColor 2px, transparent 2px)`,
+                            backgroundSize: 'calc((100% - 12px) / 11) 100%',
+                            backgroundRepeat: 'repeat-x',
+                            color: 'var(--foreground)'
+                        }}
+                    />
                 </div>
             ))}
         </motion.div>

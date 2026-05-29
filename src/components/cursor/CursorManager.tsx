@@ -44,7 +44,7 @@ export default function CursorManager() {
   const mouseX = useMotionValue(-100);
   const mouseY = useMotionValue(-100);
 
-  const springConfig = { damping: 25, stiffness: 200 };
+  const springConfig = { damping: 20, stiffness: 400, mass: 0.2 };
   const cursorX = useSpring(mouseX, springConfig);
   const cursorY = useSpring(mouseY, springConfig);
 
@@ -62,7 +62,9 @@ export default function CursorManager() {
       mouseX.set(e.clientX);
       mouseY.set(e.clientY);
       if (!isVisible) setIsVisible(true);
+    };
 
+    const handleMouseOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       const isClickable = 
         window.getComputedStyle(target).cursor === "pointer" || 
@@ -77,7 +79,8 @@ export default function CursorManager() {
     const handleMouseLeave = () => setIsVisible(false);
     const handleMouseEnter = () => setIsVisible(true);
 
-    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
+    window.addEventListener("mouseover", handleMouseOver);
     document.body.addEventListener("mouseleave", handleMouseLeave);
     document.body.addEventListener("mouseenter", handleMouseEnter);
 
@@ -97,6 +100,7 @@ export default function CursorManager() {
 
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mouseover", handleMouseOver);
       document.body.removeEventListener("mouseleave", handleMouseLeave);
       document.body.removeEventListener("mouseenter", handleMouseEnter);
       observer.disconnect();
@@ -113,6 +117,7 @@ export default function CursorManager() {
             y: cursorY,
             translateX: "-50%",
             translateY: "-50%",
+            willChange: "transform",
           }}
           initial={{ scale: 0, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
